@@ -1,44 +1,19 @@
 import UIKit
 extension UIView {
 
-    struct Embed {
-
-        enum Edge {
-            case top
-            case left
-            case bottom
-            case right
-        }
-
-        let layoutGuide: UILayoutGuide
-        let edges: [Edge]
-    }
-
     /// Embed the view into another view, with insets and other options
     /// - Parameters:
     ///   - view: The view in which the current view is to be added
     ///   - insets: The insets to be set on the view
-    ///   - options: Other options to follow while embedding
-    func embed(inView view: UIView, insets: UIEdgeInsets = UIEdgeInsets.zero, options: Embed? = nil) {
+    func embed(inView view: UIView, insets: UIEdgeInsets = UIEdgeInsets.zero) {
 
         translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(self)
 
-        var topConstraint: NSLayoutConstraint = topAnchor.constraint(equalTo: view.topAnchor, constant: insets.top)
-        var leftConstraint: NSLayoutConstraint = leftAnchor.constraint(equalTo: view.leftAnchor, constant: insets.left)
-        var bottomConstraint: NSLayoutConstraint = view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: insets.bottom)
-        var rightConstraint: NSLayoutConstraint = view.rightAnchor.constraint(equalTo: rightAnchor, constant: insets.right)
-
-        if let options = options {
-            options.edges.forEach { edge in
-                switch edge {
-                case .top: topConstraint = self.topAnchor.constraint(equalTo: options.layoutGuide.topAnchor, constant: insets.top)
-                case .left: leftConstraint = self.leftAnchor.constraint(equalTo: options.layoutGuide.leftAnchor, constant: insets.left)
-                case .bottom: bottomConstraint = options.layoutGuide.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: insets.bottom)
-                case .right: rightConstraint = options.layoutGuide.rightAnchor.constraint(equalTo: self.rightAnchor, constant: insets.right)
-                }
-            }
-        }
+        let topConstraint: NSLayoutConstraint = topAnchor.constraint(equalTo: view.topAnchor, constant: insets.top)
+        let leftConstraint: NSLayoutConstraint = leftAnchor.constraint(equalTo: view.leftAnchor, constant: insets.left)
+        let bottomConstraint: NSLayoutConstraint = view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: insets.bottom)
+        let rightConstraint: NSLayoutConstraint = view.rightAnchor.constraint(equalTo: rightAnchor, constant: insets.right)
 
         NSLayoutConstraint.activate(
             [
@@ -69,5 +44,36 @@ extension UIView {
         if size.height != 0 {
             heightAnchor.constraint(equalToConstant: size.height).isActive = true
         }
+    }
+
+    /// Sets constraints to size a particular view
+    /// - Parameter size: The size to constriant the view
+    func setSize(size: CGSize) {
+        if size.width != 0 {
+            widthAnchor.constraint(equalToConstant: size.width).isActive = true
+        }
+
+        if size.height != 0 {
+            heightAnchor.constraint(equalToConstant: size.height).isActive = true
+        }
+    }
+
+    func constraintWithBottomGreaterThanOrEqual(to view: UIView) {
+        translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(self)
+
+        let topConstraint: NSLayoutConstraint = topAnchor.constraint(equalTo: view.topAnchor)
+        let leftConstraint: NSLayoutConstraint = leftAnchor.constraint(equalTo: view.leftAnchor)
+        let bottomConstraint: NSLayoutConstraint = view.bottomAnchor.constraint(greaterThanOrEqualTo: bottomAnchor)
+        let rightConstraint: NSLayoutConstraint = view.rightAnchor.constraint(equalTo: rightAnchor)
+
+        NSLayoutConstraint.activate(
+            [
+                topConstraint,
+                leftConstraint,
+                bottomConstraint,
+                rightConstraint,
+            ]
+        )
     }
 }

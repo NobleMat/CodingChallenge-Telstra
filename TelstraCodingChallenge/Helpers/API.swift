@@ -55,7 +55,10 @@ private extension APIManager {
         URLSession.shared.dataTask(with: urlRequest) { data, response, _ in
             guard (response as? HTTPURLResponse)?.statusCode == 200,
                 let data = data
-            else { return }
+            else {
+                semaphore.signal()
+                return
+            }
 
             if !isImage {
                 result = .success(data)

@@ -32,7 +32,7 @@ extension UIFont {
     /// - Returns: A scaled font that can be used by the label.
     func scaledFont(using textStyle: UIFont.TextStyle, size: CGFloat) -> UIFont {
         guard let customFont = UIFont(name: fontName, size: size) else { fatalError() }
-        return UIFontMetrics(forTextStyle: textStyle).scaledFont(for: customFont, maximumPointSize: size * textStyle.maximumFontSize)
+        return UIFontMetrics(forTextStyle: textStyle).scaledFont(for: customFont)
     }
 }
 
@@ -44,15 +44,5 @@ extension UILabel {
     func addAccessibility(using textStyle: UIFont.TextStyle) {
         font = font.scaledFont(using: textStyle, size: font.pointSize)
         adjustsFontForContentSizeCategory = true
-    }
-}
-
-private extension UIFont.TextStyle {
-
-    var maximumFontSize: CGFloat {
-        switch self {
-        case .largeTitle: return 1.25
-        default: return 2.0
-        }
     }
 }

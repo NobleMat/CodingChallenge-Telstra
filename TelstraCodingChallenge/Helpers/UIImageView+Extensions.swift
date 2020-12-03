@@ -12,10 +12,12 @@ extension UIImageView {
     ///   - completion: A completion block that specifies if the image was downloaded successfully
     func downloaded(
         from path: String?,
+        placeholder: UIImage,
         contentMode: UIView.ContentMode = .scaleAspectFit,
         queue: DispatchQueue = DispatchQueue.main,
         completion: Action<Bool>? = nil
     ) {
+        image = placeholder
         guard let path = path else {
             completion?(false)
             return
