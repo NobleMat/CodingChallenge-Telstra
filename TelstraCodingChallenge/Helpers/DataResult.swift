@@ -41,26 +41,4 @@ extension DataResult {
             return self
         }
     }
-
-    /// This func just converts a DataResult into a completion block
-    /// - Parameters:
-    ///   - queue: The queue that the response should be in
-    ///   - completion: The completion block that returns the converted response
-    /// - Returns: self since this is discardable
-    @discardableResult
-    func response(
-        queue: DispatchQueue = .main,
-        completion: @escaping (DataResult) -> Void
-    ) -> Self {
-        guard case .success(let response) = self else {
-            queue.async {
-                completion(.failure(APIError.cannotProcessData))
-            }
-            return self
-        }
-        queue.async {
-            completion(.success(response))
-        }
-        return self
-    }
 }

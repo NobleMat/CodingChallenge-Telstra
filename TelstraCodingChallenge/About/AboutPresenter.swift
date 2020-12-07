@@ -41,6 +41,7 @@ extension AboutPresenter: AboutPresenting {
     }
 
     func refreshData() {
+        display.set(items: [])
         fetchData()
     }
 }

@@ -21,20 +21,20 @@ extension APIManager: APIManaging {
         path: String,
         isImage: Bool = false,
         method: HTTPMethod = .get,
-        timeout: Double = 20
-    ) -> DataResult {
+        timeout: Double = 20,
+        completion: @escaping Action<DataResult>
+    ) {
         guard
             let url = URL(string: path)
         else {
-            return .failure(APIError.urlError)
+            return completion(.failure(APIError.urlError))
         }
         var urlRequest: URLRequest = URLRequest(
             url: url,
             timeoutInterval: timeout
         )
         urlRequest.httpMethod = method.value
-
-        return request(urlRequest: urlRequest, isImage: isImage)
+        request(urlRequest: urlRequest, completion: completion)
     }
 }
 
@@ -46,31 +46,30 @@ private extension APIManager {
 
     func request(
         urlRequest: URLRequest,
-        isImage: Bool = false
-    ) -> DataResult {
-        var result: DataResult = .failure(APIError.cannotProcessData)
+        isImage: Bool = false,
+        completion: @escaping Action<DataResult>
+    ) {
+        if !NetworkManager.isConnectedToNetwork() {
+            return completion(.failure(APIError.cannotProcessData))
+        }
+        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+            if error.isNil {
+                guard (response as? HTTPURLResponse)?.statusCode == 200,
+                    let data = data
+                else {
+                    completion(.failure(APIError.cannotProcessData))
+                    return
+                }
 
-        let semaphore = DispatchSemaphore(value: 0)
-
-        URLSession.shared.dataTask(with: urlRequest) { data, response, _ in
-            guard (response as? HTTPURLResponse)?.statusCode == 200,
-                let data = data
-            else {
-                semaphore.signal()
-                return
+                if !isImage {
+                    completion(.success(data))
+                } else if let mimeType = response?.mimeType,
+                    mimeType.hasPrefix("image") {
+                    completion(.success(data))
+                }
+            } else {
+                return completion(.failure(APIError.cannotProcessData))
             }
-
-            if !isImage {
-                result = .success(data)
-            } else if let mimeType = response?.mimeType,
-                mimeType.hasPrefix("image") {
-                result = .success(data)
-            }
-            semaphore.signal()
         }.resume()
-
-        semaphore.wait()
-
-        return result
     }
 }

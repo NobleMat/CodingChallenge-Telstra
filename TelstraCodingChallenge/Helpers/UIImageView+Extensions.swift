@@ -7,6 +7,7 @@ extension UIImageView {
     ///
     /// - Parameters:
     ///   - path: The link to the image
+    ///   - placeholder: A placeholder image to be shown
     ///   - contentMode: The content mode of the imageView, defaults to ScaleAspectFit
     ///   - queue: The queue used to set the image, defaults to the main Queue
     ///   - completion: A completion block that specifies if the image was downloaded successfully
@@ -30,7 +31,7 @@ extension UIImageView {
 
             DispatchQueue.global(qos: .utility).async {
 
-                API.request(path: path, isImage: true).response { result in
+                API.request(path: path, isImage: true) { result in
                     switch result {
                     case .success(let data):
                         guard let image = UIImage(data: data) else {

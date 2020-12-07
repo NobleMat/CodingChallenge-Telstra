@@ -40,6 +40,7 @@
 		FF6299DC2579B75000B61AE1 /* TestAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6299DB2579B75000B61AE1 /* TestAppDelegate.swift */; };
 		FF6299DD2579B76B00B61AE1 /* UIView+Embed.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6299B525798BAF00B61AE1 /* UIView+Embed.swift */; };
 		FF6299DF2579B78E00B61AE1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6299DE2579B78E00B61AE1 /* main.swift */; };
+		FFAC4731257D93EC002BE815 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAC4730257D93EC002BE815 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		FF6299D92579B6D500B61AE1 /* MockDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDisplay.swift; sourceTree = "<group>"; };
 		FF6299DB2579B75000B61AE1 /* TestAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppDelegate.swift; sourceTree = "<group>"; };
 		FF6299DE2579B78E00B61AE1 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		FFAC4730257D93EC002BE815 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 				FF62999F25798B6700B61AE1 /* Display */,
 				FF6299A625798B7C00B61AE1 /* Networking */,
 				FF6299AF25798B9100B61AE1 /* Protocols */,
+				FFAC472D257D8C13002BE815 /* Reachability */,
 				FF6299B425798BA000B61AE1 /* UIKit */,
 			);
 			path = Helpers;
@@ -285,6 +288,14 @@
 				FF6299D42579B67900B61AE1 /* AboutPresenterTests.swift */,
 			);
 			path = About;
+			sourceTree = "<group>";
+		};
+		FFAC472D257D8C13002BE815 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				FFAC4730257D93EC002BE815 /* NetworkManager.swift */,
+			);
+			name = Reachability;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -452,6 +463,7 @@
 				FF6299BA25798BAF00B61AE1 /* UIView+Embed.swift in Sources */,
 				FF6299B325798B9E00B61AE1 /* CellDisplayable.swift in Sources */,
 				FF6299C425798E0500B61AE1 /* NoDataTableViewCell.swift in Sources */,
+				FFAC4731257D93EC002BE815 /* NetworkManager.swift in Sources */,
 				FF6299BD25798BAF00B61AE1 /* UIColor+Extensions.swift in Sources */,
 				FF6299BE25798BAF00B61AE1 /* UIFont+Extensions.swift in Sources */,
 				FF6299BC25798BAF00B61AE1 /* UIRefreshControl+Extensions.swift in Sources */,
