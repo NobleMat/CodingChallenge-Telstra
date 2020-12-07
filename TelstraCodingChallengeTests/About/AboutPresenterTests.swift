@@ -93,6 +93,46 @@ class AboutPresenterTests: XCTestCase {
         // Then
         XCTAssertEqual(mockManager.fetchDataCalledCount, 2)
     }
+
+    func testItems_successToFailure() {
+        // Given
+        presenter.displayDidLoad()
+        mockManager.fetchDataCompletion?(.success(About.mock(rows: [Row.mock()])))
+
+        // Then
+        XCTAssertEqual(mockDisplay.setItemsCalledCount, 1)
+        XCTAssertEqual(mockDisplay.setItems?.count, 1)
+        XCTAssertTrue(mockDisplay.setItems?.first is AboutItem)
+
+        // When
+        presenter.refreshData()
+        mockManager.fetchDataCompletion?(.failure(APIError.unknown))
+
+        // Then
+        XCTAssertEqual(mockDisplay.setItemsCalledCount, 3)
+        XCTAssertEqual(mockDisplay.setItems?.count, 1)
+        XCTAssertTrue(mockDisplay.setItems?.first is NoDataItem)
+    }
+
+    func testItems_failureToSuccess() {
+        // Given
+        presenter.displayDidLoad()
+        mockManager.fetchDataCompletion?(.failure(APIError.unknown))
+
+        // Then
+        XCTAssertEqual(mockDisplay.setItemsCalledCount, 1)
+        XCTAssertEqual(mockDisplay.setItems?.count, 1)
+        XCTAssertTrue(mockDisplay.setItems?.first is NoDataItem)
+
+        // When
+        presenter.refreshData()
+        mockManager.fetchDataCompletion?(.success(About.mock(rows: [Row.mock()])))
+
+        // Then
+        XCTAssertEqual(mockDisplay.setItemsCalledCount, 3)
+        XCTAssertEqual(mockDisplay.setItems?.count, 1)
+        XCTAssertTrue(mockDisplay.setItems?.first is AboutItem)
+    }
 }
 
 // MARK: - Private
@@ -109,35 +149,5 @@ private extension AboutPresenterTests {
             display: display,
             manager: manager
         )
-    }
-}
-
-private final class MockAboutDisplay: MockDisplay, AboutDisplaying {
-
-    private(set) var startRefreshingCalledCount: Int = 0
-    func startRefreshing() {
-        startRefreshingCalledCount += 1
-    }
-
-    private(set) var endRefreshingCalledCount: Int = 0
-    func endRefreshing() {
-        endRefreshingCalledCount += 1
-    }
-
-    private(set) var setItemsCalledCount: Int = 0
-    private(set) var setItems: TableViewItems?
-    func set(items: TableViewItems) {
-        setItemsCalledCount += 1
-        setItems = items
-    }
-}
-
-private final class MockAboutManager: AboutManaging {
-
-    private(set) var fetchDataCalledCount: Int = 0
-    private(set) var fetchDataCompletion: Action<DecodableResult<About>>?
-    func fetchData(completion: @escaping Action<DecodableResult<About>>) {
-        fetchDataCalledCount += 1
-        fetchDataCompletion = completion
     }
 }

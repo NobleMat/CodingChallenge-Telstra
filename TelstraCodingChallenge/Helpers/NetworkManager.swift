@@ -1,9 +1,9 @@
 import SystemConfiguration
 
 final class NetworkManager {
-    
+
     /// Check if the device is connected to the internet
-    /// 
+    ///
     /// - Returns: A boolean indicating the current network conenction
     static func isConnectedToNetwork() -> Bool {
         var zeroAddress = sockaddr_in(
@@ -27,11 +27,9 @@ final class NetworkManager {
             return false
         }
 
-        // Working for Cellular and WIFI
         let isReachable = (flags.rawValue & UInt32(kSCNetworkFlagsReachable)) != 0
         let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
-        let isReachableNetwork = (isReachable && !needsConnection)
 
-        return isReachableNetwork
+        return isReachable && !needsConnection
     }
 }

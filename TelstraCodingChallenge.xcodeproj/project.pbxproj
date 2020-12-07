@@ -41,6 +41,10 @@
 		FF6299DD2579B76B00B61AE1 /* UIView+Embed.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6299B525798BAF00B61AE1 /* UIView+Embed.swift */; };
 		FF6299DF2579B78E00B61AE1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6299DE2579B78E00B61AE1 /* main.swift */; };
 		FFAC4731257D93EC002BE815 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAC4730257D93EC002BE815 /* NetworkManager.swift */; };
+		FFAC4733257D9814002BE815 /* MockAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAC4732257D9814002BE815 /* MockAPIManager.swift */; };
+		FFAC4735257D9BEA002BE815 /* MockAboutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAC4734257D9BEA002BE815 /* MockAboutManager.swift */; };
+		FFAC4737257D9C2E002BE815 /* MockAboutDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAC4736257D9C2E002BE815 /* MockAboutDisplay.swift */; };
+		FFAC4739257D9CC8002BE815 /* AboutManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFAC4738257D9CC8002BE815 /* AboutManagerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +95,10 @@
 		FF6299DB2579B75000B61AE1 /* TestAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAppDelegate.swift; sourceTree = "<group>"; };
 		FF6299DE2579B78E00B61AE1 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FFAC4730257D93EC002BE815 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		FFAC4732257D9814002BE815 /* MockAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIManager.swift; sourceTree = "<group>"; };
+		FFAC4734257D9BEA002BE815 /* MockAboutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAboutManager.swift; sourceTree = "<group>"; };
+		FFAC4736257D9C2E002BE815 /* MockAboutDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAboutDisplay.swift; sourceTree = "<group>"; };
+		FFAC4738257D9CC8002BE815 /* AboutManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutManagerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,6 +285,9 @@
 			isa = PBXGroup;
 			children = (
 				FF6299D72579B6C000B61AE1 /* About+Mock.swift */,
+				FFAC4736257D9C2E002BE815 /* MockAboutDisplay.swift */,
+				FFAC4734257D9BEA002BE815 /* MockAboutManager.swift */,
+				FFAC4732257D9814002BE815 /* MockAPIManager.swift */,
 				FF6299D92579B6D500B61AE1 /* MockDisplay.swift */,
 			);
 			path = Mocks;
@@ -286,6 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				FF6299D42579B67900B61AE1 /* AboutPresenterTests.swift */,
+				FFAC4738257D9CC8002BE815 /* AboutManagerTests.swift */,
 			);
 			path = About;
 			sourceTree = "<group>";
@@ -474,8 +486,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFAC4735257D9BEA002BE815 /* MockAboutManager.swift in Sources */,
+				FFAC4739257D9CC8002BE815 /* AboutManagerTests.swift in Sources */,
 				FF6299DD2579B76B00B61AE1 /* UIView+Embed.swift in Sources */,
 				FF6299DC2579B75000B61AE1 /* TestAppDelegate.swift in Sources */,
+				FFAC4733257D9814002BE815 /* MockAPIManager.swift in Sources */,
+				FFAC4737257D9C2E002BE815 /* MockAboutDisplay.swift in Sources */,
 				FF6299D52579B67900B61AE1 /* AboutPresenterTests.swift in Sources */,
 				FF6299D82579B6C000B61AE1 /* About+Mock.swift in Sources */,
 				FF6299DA2579B6D500B61AE1 /* MockDisplay.swift in Sources */,

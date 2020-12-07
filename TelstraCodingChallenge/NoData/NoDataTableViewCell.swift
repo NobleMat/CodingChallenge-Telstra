@@ -36,18 +36,19 @@ final class NoDataTableViewCell: UITableViewCell, Reusable {
 
 private extension NoDataTableViewCell {
 
+    enum Constants {
+        static let contentInsets: UIEdgeInsets = .init(top: 16, left: 16, bottom: 16, right: 16)
+        static let imageViewSize: CGSize = .init(width: 0, height: 80)
+        static let errorImage = UIImage(named: "error")!
+    }
+
     func setupViews() {
         errorContentView.embed(
             inView: contentView,
-            insets: UIEdgeInsets(
-                top: 16,
-                left: 16,
-                bottom: 16,
-                right: 16
-            )
+            insets: Constants.contentInsets
         )
 
-        errorImageView.setSize(size: .init(width: 0, height: 80))
+        errorImageView.setSize(size: Constants.imageViewSize)
     }
 
     func makeStackView() -> UIStackView {
@@ -71,7 +72,7 @@ private extension NoDataTableViewCell {
 
     func makeImageView() -> UIImageView {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "error")
+        imageView.image = Constants.errorImage
         imageView.tintColor = .systemRed
         imageView.contentMode = .scaleAspectFit
         return imageView

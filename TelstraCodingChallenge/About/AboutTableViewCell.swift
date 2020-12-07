@@ -32,6 +32,8 @@ final class AboutTableViewCell: UITableViewCell, Reusable {
 
     func configure(with item: AboutItem) {
         contentView.backgroundColor = .cellBackground
+        backgroundColor = .cellBackground
+
         titleLabel.text = item.title
         descriptionLabel.text = item.description
         aboutImageView.downloaded(
@@ -46,12 +48,12 @@ final class AboutTableViewCell: UITableViewCell, Reusable {
 private extension AboutTableViewCell {
 
     enum Constants {
-        static let defaultImage: UIImage = UIImage(named: "defaultImage")!
+        static let defaultImage = UIImage(named: "defaultImage")!
         static let contentInsets: UIEdgeInsets = .init(top: 16, left: 16, bottom: 16, right: 16)
         static let imageViewSize: CGSize = .init(width: 75, height: 75)
     }
 
-    private func setupViews() {
+    func setupViews() {
         contentStackView.embed(
             inView: contentView,
             insets: Constants.contentInsets
@@ -67,13 +69,13 @@ private extension AboutTableViewCell {
         aboutImageView.constraintWithBottomGreaterThanOrEqual(to: imageContentView)
     }
 
-    private func makeView() -> UIView {
+    func makeView() -> UIView {
         let view = UIView()
         view.backgroundColor = .clear
         return view
     }
 
-    private func makeLabel(with font: UIFont) -> UILabel {
+    func makeLabel(with font: UIFont) -> UILabel {
         let label = UILabel()
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
@@ -82,12 +84,12 @@ private extension AboutTableViewCell {
         return label
     }
 
-    private func makeImageView() -> UIImageView {
+    func makeImageView() -> UIImageView {
         let imageView = UIImageView()
         return imageView
     }
 
-    private func makeStackView() -> UIStackView {
+    func makeStackView() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [imageContentView, labelContentView])
         stackView.axis = .horizontal
         stackView.alignment = .fill
@@ -96,7 +98,7 @@ private extension AboutTableViewCell {
         return stackView
     }
 
-    private func makeLabelStackView() -> UIStackView {
+    func makeLabelStackView() -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [titleLabel, descriptionLabel])
         stackView.axis = .vertical
         stackView.alignment = .fill
@@ -111,10 +113,10 @@ struct AboutItem: CellDisplayable {
     let description: String?
     let imageURL: String?
 
-    init(using about: Row) {
-        title = about.title
-        description = about.rowDescription
-        imageURL = about.imageURL
+    init(using row: Row) {
+        title = row.title
+        description = row.rowDescription
+        imageURL = row.imageURL
     }
 
     func extractCell(from tableView: UITableView, for indexPath: IndexPath) -> UITableViewCell {

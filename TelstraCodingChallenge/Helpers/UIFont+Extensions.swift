@@ -37,6 +37,7 @@ extension UIFont {
 }
 
 extension UILabel {
+
     /// Add text scaling to the the UILabel
     /// - Parameters:
     ///   - textStyle: TextStyle of the font to be used. This can be used to restrict the maximum font size

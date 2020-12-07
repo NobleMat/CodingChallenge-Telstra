@@ -59,6 +59,8 @@ extension UIView {
         }
     }
 
+    /// Constraint a view to the left, right and top with an equal relationship and constraint the bottom with a greater than or equal relationship
+    /// - Parameter view: The superview to constraint to
     func constraintWithBottomGreaterThanOrEqual(to view: UIView) {
         translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(self)
